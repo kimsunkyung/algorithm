@@ -13,10 +13,10 @@ def go(nlist,i,k,total):
         return
     go(nlist,i,k+1,total)
 
-n = int(input())
+n = int(sys.stdin.readline())
 a = []
 for k in range(n):
-    p,q = list(map(int,input().split()))
+    p,q = list(map(int,sys.stdin.readline().split()))
     a.append((p,q))
 for j in range(n-2):
     go(a,j,j+1,1)
