@@ -1,7 +1,6 @@
 import sys
 sys.setrecursionlimit(10000000)
 result = []
-
 def go(nlist,i,k,total):
     if nlist[i][1]<=nlist[k][0] and k<n:
         if k+1<n:

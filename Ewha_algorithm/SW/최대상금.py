@@ -1,41 +1,52 @@
-for i in range(int(input())):
-    number,t = map(int,input().split())
-    number = list(str(number))
-    pop_number = []
-    l,c = 0,0
-    result = []
-    for pp in range(len(number)):
-        number[pp] = int(number[pp])
-        pop_number.append(number[pp])
-    while l<t:
-        s =len(number)-1
-        max_num = 0
-        while s>=0:
-            for qq in pop_number:
-                max_num = max(qq, max_num)
-            if max_num == number[s]:
-                if number[s] == number[c]:
-                    if not pop_number:
-                        break
-                    pop_number.remove(number[s])
-                    s = len(number) - 1
-                    c += 1
+T = int(input())
+
+for t in range(T):
+    inp = input().split()
+
+    arr = []
+    val = inp[0]
+    M = int(inp[1])
+
+    for i in range(len(val)):
+        arr.append(int(val[i]))
+
+    max_arr = [[] for rows in range(2)]
+    N = len(arr)
+    num = 0
+
+    for i in range(N - 1):
+        if (arr[i] != max(arr[i:N])):
+            for j in range(N - 1, i, -1):
+                if (arr[j] == max(arr[i:N])):
+                    if (max(arr[i:N]) == max(arr)):
+                        num = num + 1
+                        max_arr[0].append(arr[i])
+                        max_arr[1].append(j)
+                    temp = arr[i]
+                    arr[i] = arr[j]
+                    arr[j] = temp
+                    M = M - 1
                     break
-                else:
-                    pop_number.remove(number[s])
-                    number[s],number[c] = number[c],number[s]
-                    c += 1
-                    l += 1
-                r = 0
-                for ss in range(len(number)):
-                    r= r+pow(10,(len(number)-(ss+1)))*number[ss]
-                result.append(r)
-                break
-            s -= 1
-    for oo in result:
-        if max_num<oo:
-            max_num = oo
-    print(max_num)
+        if (M == 0):
+            break
 
+    if (num > 1):
+        max_arr[0].sort()
+        for i in range(len(max_arr[0])):
+            arr[max_arr[1][i]] = max_arr[0][i]
 
+    if (M != 0):
+        for i in range(N):
+            if (arr.count(arr[i]) > 1):
+                M = 0
+        while (M > 0):
+            temp = arr[len(arr) - 2]
+            arr[len(arr) - 2] = arr[len(arr) - 1]
+            arr[len(arr) - 1] = temp
+            M = M - 1
 
+    answer = ""
+    for i in range(len(arr)):
+        answer += str(arr[i])
+
+    print("#%s %s" % (t + 1, answer))
