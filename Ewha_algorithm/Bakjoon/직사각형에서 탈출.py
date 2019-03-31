@@ -1,0 +1,8 @@
+x,y,w,h = map(str,input().split())
+x,y,w,h = int(x),int(y),int(w),int(h)
+t_x = abs(w-x)
+t_y = abs(h-y)
+m = min(x,y)
+n = min(t_x,t_y)
+result = min(m,n)
+print(result)
