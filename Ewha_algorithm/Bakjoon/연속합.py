@@ -1,16 +1,7 @@
 n = int(input())
-a = list(map(int,input().split()))
-max_total = 0
-result = []
+a = [0]+list(map(int,input().split()))
+result = [a[0]]
 
-for i in range(n):
-    if max_total+a[i]>=max_total:
-        max_total+=a[i]
-        result.append(max_total)
-    else:
-        max_total = 0
-r_total = 0
-for k in result:
-    if r_total<k:
-        r_total = k
-print(r_total)
+for i in range(1,n+1):
+    result.append(max(result[i-1]+a[i],a[i]))
+print(max(result[1:]))
